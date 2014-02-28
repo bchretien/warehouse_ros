@@ -9,6 +9,7 @@ find_package(catkin REQUIRED
   std_msgs)
 find_package(Boost COMPONENTS system filesystem thread)
 find_package(OpenSSL)
+include(cmake/FindMongoDB.cmake)
 
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include")
 
@@ -16,10 +17,8 @@ catkin_package(
   INCLUDE_DIRS ${CMAKE_CURRENT_BINARY_DIR}/include include
   LIBRARIES warehouse_ros
   CATKIN_DEPENDS roscpp geometry_msgs rostime std_msgs
-  DEPENDS Boost
+  DEPENDS Boost MongoDB
   )
-
-include(cmake/FindMongoDB.cmake)
 
 if (NOT MongoDB_EXPOSE_MACROS)
   add_definitions(-DMONGO_EXPOSE_MACROS)
